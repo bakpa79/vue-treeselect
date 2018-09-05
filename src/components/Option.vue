@@ -185,7 +185,7 @@
         })
 
         return (
-          <label class={labelClassName}>
+          <label class={labelClassName} id={node.id ? node.id : null}>
             {node.label}
             {shouldShowCount && (
               <span class={countClassName}>({count})</span>

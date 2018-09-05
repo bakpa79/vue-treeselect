@@ -829,7 +829,7 @@ describe('Basic', () => {
       },
     })
 
-    wrapper.vm.openMenu()
+    // wrapper.vm.openMenu()
 
     const optionsWrappers = wrapper.findAll(Option).wrappers
     const a = optionsWrappers.find(optionWrapper => optionWrapper.vm.node.id === 'a')

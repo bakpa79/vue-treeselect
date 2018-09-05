@@ -1,9 +1,11 @@
 export default {
   provide() {
     return {
-      maxHeight: {
-        type: [ Number, null ],
-        default: 300,
+      props: {
+        maxHeight: {
+          type: [ Number, null ],
+          default: 300,
+        },
       },
     }
   },

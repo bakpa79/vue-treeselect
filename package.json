@@ -31,7 +31,7 @@
   },
   "pre-commit": "lint",
   "dependencies": {
-    "@babel/runtime": "^7.0.0",
+    "@babel/runtime": "^7.0.0-beta.56",
     "@fishtank/colors": "3.0.8",
     "@fishtank/icons-vue": "^3.8.4",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",

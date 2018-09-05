@@ -436,7 +436,10 @@
     color: @treeselect-single-value-font-color-focused;
   }
 }
-
+//temp focus state style for vue select tree
+.vue-treeselect--focused .vue-treeselect__menu {
+  box-shadow: 0 0 0 2px @color-selected;
+}
 .vue-treeselect__multi-value-item-container {
   display: inline-block;
   padding-top: @treeselect-padding;
@@ -700,12 +703,12 @@
   -webkit-overflow-scrolling: touch;
 
   .vue-treeselect--open-below & {
-    .border-radius-bottom(@treeselect-border-radius-lg);
+    // .border-radius-bottom(@treeselect-border-radius-lg);
 
     top: 0;
     margin-top: (-@treeselect-control-border-width);
-    border-top-color: @treeselect-control-menu-divider-color;
-    box-shadow: @treeselect-menu-box-shadow;
+    // border-top-color: @t   reeselect-control-menu-divider-color;
+    // box-shadow: @treeselect-menu-box-shadow;
   }
 
   .vue-treeselect--open-above & {
@@ -749,7 +752,7 @@
 }
 
 .vue-treeselect__option--highlight {
-  background: @treeselect-option-bg-highlight;
+  background: @color-selected-lightest;
 }
 
 .vue-treeselect__option--selected {
@@ -1102,4 +1105,18 @@
   border: 0;
   overflow: visible;
   box-sizing: border-box;
+}
+@time:2s;
+.scale-enter-active {
+  transition: transform @time, opacity @time, delay @time;
+}
+.scale-leave-active {
+  transition: transform @time, opacity @time;
+}
+.scale-enter, .scale-leave-to {
+  transform: scale(0);
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 4px;
 }
