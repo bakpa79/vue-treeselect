@@ -17,6 +17,8 @@ import {
   ORDER_SELECTED, LEVEL, INDEX,
 } from '../constants'
 
+import fttreeselectMixin from './fttreeselectMixin'
+
 function sortValueByIndex(a, b) {
   let i = 0
   do {
@@ -61,6 +63,7 @@ function getErrorMessage(err) {
 let instanceId = 0
 
 export default {
+  mixins: [ fttreeselectMixin ],
   provide() {
     return {
       // Enable access to the instance of root component of vue-treeselect
@@ -92,7 +95,7 @@ export default {
      */
     alwaysOpen: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
@@ -243,7 +246,10 @@ export default {
       type: Boolean,
       default: true,
     },
-
+    collapseMenuPadding: {
+      type: Boolean,
+      default: false,
+    },
     /**
      * How many levels of branch nodes should be automatically expanded when loaded.
      * Set `Infinity` to make all branch nodes expanded by default.
@@ -312,7 +318,10 @@ export default {
       type: Boolean,
       default: false,
     },
-
+    hideControl: {
+      type: Boolean,
+      default: false,
+    },
     /**
      * Deprecated. Use `instanceId` prop instead.
      * @type {string|number}
@@ -499,6 +508,10 @@ export default {
     placeholder: {
       type: String,
       default: 'Select...',
+    },
+    dropdownpopover: {
+      type: Boolean,
+      default: true,
     },
 
     /**

@@ -140,14 +140,12 @@
     render() {
       const { instance } = this
       const ValueContainer = instance.single ? SingleValue : MultiValue
-
-      return (
-        <div class="vue-treeselect__control" onMousedown={instance.handleMouseDown}>
-          <ValueContainer ref="value-container" />
-          {this.renderX()}
-          {this.renderArrow()}
-        </div>
-      )
+      const Controls = instance.hideControl === true ? <div class="vue-treeselect__control" style="opacity:0; height:0; display:block"><ValueContainer ref="value-container" /></div> : <div class="vue-treeselect__control" onMousedown={instance.handleMouseDown}>
+            <ValueContainer ref="value-container" />
+            {this.renderX()}
+            {this.renderArrow()}
+          </div>
+      return (Controls)
     },
   }
 </script>

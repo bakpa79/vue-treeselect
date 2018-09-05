@@ -1,10 +1,16 @@
 <script>
+  import {
+    CheckboxSelected24 as CheckboxSelected,
+    CheckboxUnselected24 as CheckboxUnselected,
+    CheckboxSelectedO24 as CheckboxSelectedOpen,
+  } from '@fishtank/icons-vue'
   import { UNCHECKED, INDETERMINATE, CHECKED } from '../constants'
   import { onLeftClick } from '../utils'
   import Tip from './Tip'
   import ArrowIcon from './icons/Arrow'
 
-  let arrowPlaceholder, checkMark, minusMark
+  let arrowPlaceholder, checkMark
+  // minusMark, openMark
 
   const Option = {
     name: 'vue-treeselect--option',
@@ -125,6 +131,7 @@
       renderCheckbox() {
         const { instance, node } = this
         const checkedState = instance.forest.checkedStateMap[node.id]
+        const nodeId = node.id
         const checkboxClass = {
           'vue-treeselect__checkbox': true,
           'vue-treeselect__checkbox--checked': checkedState === CHECKED,
@@ -132,19 +139,22 @@
           'vue-treeselect__checkbox--unchecked': checkedState === UNCHECKED,
           'vue-treeselect__checkbox--disabled': node.isDisabled,
         }
-
-        if (!checkMark) checkMark = (
-          <span class="vue-treeselect__check-mark" />
+        if (checkedState === 2) checkMark = (
+          <span class="vue-treeselect__check-mark"><CheckboxSelected/></span>
         )
-        if (!minusMark) minusMark = (
-          <span class="vue-treeselect__minus-mark" />
+        if (checkedState === 1) checkMark = (
+          <span class="vue-treeselect__minus-mark"><CheckboxSelectedOpen/></span>
+        )
+        if (checkedState === 0) checkMark = (
+          <span class="vue-treeselect__check-mark__unselected"><CheckboxUnselected/></span>
         )
 
         return (
-          <span class={checkboxClass}>
-            {checkMark}
-            {minusMark}
-          </span>
+          <transition name="scale">
+            <span key={nodeId} class={checkboxClass}>
+              {checkMark}
+            </span>
+          </transition>
         )
       },
 
@@ -174,7 +184,7 @@
         })
 
         return (
-          <label class={labelClassName}>
+          <label class={labelClassName} id={node.id ? node.id : null}>
             {node.label}
             {shouldShowCount && (
               <span class={countClassName}>({count})</span>
