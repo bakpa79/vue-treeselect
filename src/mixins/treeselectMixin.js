@@ -405,7 +405,7 @@ export default {
      * Sets `maxHeight` style value of the menu.
      */
     maxHeight: {
-      type: Number,
+      type: [ Number, null ],
       default: 300,
     },
 
