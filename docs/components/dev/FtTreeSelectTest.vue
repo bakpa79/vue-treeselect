@@ -40,6 +40,12 @@
               {
                 id: '1',
                 label: 'alpha',
+                children: [
+                  {
+                    id: '1.1',
+                    label: 'alpha1',
+                  },
+                ],
               },
               {
                 id: '2',
