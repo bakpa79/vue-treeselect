@@ -1,9 +1,12 @@
 <script>
+  import {
+    CaretSmlDown24 as ArrowIcon,
+  } from '@fishtank/icons-vue'
   import { onLeftClick, isPromise } from '../utils'
   import SingleValue from './SingleValue'
   import MultiValue from './MultiValue'
   import DeleteIcon from './icons/Delete'
-  import ArrowIcon from './icons/Arrow'
+  // import ArrowIcon from './icons/Arrow'
 
   export default {
     name: 'vue-treeselect--control',
