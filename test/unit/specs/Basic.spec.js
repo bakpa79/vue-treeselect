@@ -817,6 +817,7 @@ describe('Basic', () => {
   it('an option should be rendered with its id in the markup', () => {
     const wrapper = mount(Treeselect, {
       propsData: {
+        alwaysOpen: false,
         options: [ {
           id: 'a',
           label: 'a',
@@ -829,7 +830,7 @@ describe('Basic', () => {
       },
     })
 
-    // wrapper.vm.openMenu()
+    wrapper.vm.openMenu()
 
     const optionsWrappers = wrapper.findAll(Option).wrappers
     const a = optionsWrappers.find(optionWrapper => optionWrapper.vm.node.id === 'a')

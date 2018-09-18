@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "dev": "node build/dev-server.js",
-    "bundle": "node build/bundle.js",
+    "bundle": "rm -rf dist/ && node build/bundle.js",
     "docs": "rimraf gh-pages && mkdir gh-pages && node build/build.js",
     "unit": "karma start test/unit/karma.conf.js --watch",
     "gh-pages": "npm run docs && gh-pages --dist gh-pages --branch gh-pages --dotfiles",
@@ -32,8 +32,6 @@
   "pre-commit": "lint",
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.56",
-    "@fishtank/colors": "3.0.8",
-    "@fishtank/icons-vue": "^3.8.4",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "easings-css": "^1.0.0",
     "fuzzysearch": "^1.0.3",
@@ -43,6 +41,8 @@
     "watch-size": "^2.0.0"
   },
   "devDependencies": {
+    "@fishtank/colors": "3.0.8",
+    "@fishtank/icons-vue": "^3.8.4",
     "@babel/core": "^7.0.0",
     "@babel/plugin-syntax-jsx": "^7.0.0",
     "@babel/plugin-transform-runtime": "^7.0.0",
