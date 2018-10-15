@@ -1,10 +1,10 @@
 <script>
   import {
-    CheckboxSelected24 as CheckboxSelected,
-    CheckboxUnselected24 as CheckboxUnselected,
     CheckboxSelectedO24 as CheckboxSelectedOpen,
+    CheckboxUnselected24 as CheckboxUnselected,
+    CheckboxSelected24 as CheckboxSelected,
     CheckboxPartial24 as CheckboxSelectedPartial,
-    CaretSmlDown24 as ArrowIcon,
+    CaretDown24 as ArrowIcon,
   } from '@fishtank/icons-vue'
   import { UNCHECKED, INDETERMINATE, CHECKED } from '../constants'
   import { onLeftClick } from '../utils'
@@ -137,9 +137,21 @@
       renderCheckbox() {
         const { instance, node } = this
         let hasChildren = false
+        let allVisibleIsSelected = []
+        const selectedNodeIds = []
+
+        instance.selectedNodes.forEach(sNode => {
+          selectedNodeIds.push(sNode.id)
+        })
+        allVisibleIsSelected = instance.visibleOptionIds.filter(vOp => {
+          return !selectedNodeIds.includes(vOp)
+        })
 
         if (node.children !== undefined) hasChildren = true
         const checkedState = instance.forest.checkedStateMap[node.id]
+
+        const parentNodeCheckedState = node.parentNode !== null ? instance.forest.checkedStateMap[node.parentNode.id] : 0
+
         const checkboxClass = {
           'vue-treeselect__checkbox': true,
           'vue-treeselect__checkbox--checked': checkedState === CHECKED,
@@ -147,18 +159,55 @@
           'vue-treeselect__checkbox--unchecked': checkedState === UNCHECKED,
           'vue-treeselect__checkbox--disabled': node.isDisabled,
         }
-        if (checkedState === 2 && hasChildren) checkMark = (
-          <span class="vue-treeselect__check-mark"><CheckboxSelectedOpen/></span>
-        )
-        if (checkedState === 2 && !hasChildren) checkMark = (
-          <span class="vue-treeselect__check-mark"><CheckboxSelected/></span>
-        )
-        if (checkedState === 1) checkMark = (
-          <span class="vue-treeselect__minus-mark"><CheckboxSelectedPartial/></span>
-        )
-        if (checkedState === 0) checkMark = (
-          <span class="vue-treeselect__check-mark__unselected"><CheckboxUnselected/></span>
-        )
+        if (node.level === 0) {
+          if (checkedState === 2) checkMark = (
+            <span class="vue-treeselect__check-mark"><CheckboxSelected/></span>
+          )
+          if (checkedState === 1) checkMark = (
+            <span class="vue-treeselect__minus-mark"><CheckboxSelectedPartial/></span>
+          )
+          if (checkedState === 0) checkMark = (
+            <span class="vue-treeselect__check-mark__unselected"><CheckboxUnselected/></span>
+          )
+        } else {
+          if (allVisibleIsSelected.length > 0) {
+            if (checkedState === 2 && hasChildren) checkMark = (
+              <span class="vue-treeselect__check-mark"><CheckboxSelected/>a</span>
+            )
+            if (checkedState === 2 && !hasChildren && parentNodeCheckedState === 2) checkMark = (
+              <span class="vue-treeselect__check-mark"><CheckboxSelectedOpen/></span>
+            )
+            if (checkedState === 2 && !hasChildren && parentNodeCheckedState === 1) checkMark = (
+              <span class="vue-treeselect__check-mark"><CheckboxSelected/></span>
+            )
+            if (checkedState === 1) checkMark = (
+              <span class="vue-treeselect__minus-mark"><CheckboxSelectedPartial/></span>
+            )
+            if (checkedState === 0) checkMark = (
+              <span class="vue-treeselect__check-mark__unselected"><CheckboxUnselected/></span>
+            )
+          } else {
+            if (checkedState === 2 && hasChildren) checkMark = (
+              <span class="vue-treeselect__check-mark"><CheckboxSelectedOpen/></span>
+            )
+            if (checkedState === 2 && !hasChildren) checkMark = (
+              <span class="vue-treeselect__check-mark"><CheckboxSelectedOpen/></span>
+            )
+            if (checkedState === 1) checkMark = (
+              <span class="vue-treeselect__minus-mark"><CheckboxSelectedPartial/></span>
+            )
+            if (checkedState === 0) checkMark = (
+              <span class="vue-treeselect__check-mark__unselected"><CheckboxUnselected/></span>
+            )
+          }
+          ///
+          // if (checkedState === 1) checkMark = (
+          //   <span class="vue-treeselect__minus-mark"><CheckboxSelectedPartial/></span>
+          // )
+          // if (checkedState === 0) checkMark = (
+          //   <span class="vue-treeselect__check-mark__unselected"><CheckboxUnselected/></span>
+          // )
+        }
 
         return (
           <span class={checkboxClass}>
