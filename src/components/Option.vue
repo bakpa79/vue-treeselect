@@ -172,7 +172,7 @@
         } else {
           if (allVisibleIsSelected.length > 0) {
             if (checkedState === 2 && hasChildren) checkMark = (
-              <span class="vue-treeselect__check-mark"><CheckboxSelected/>a</span>
+              <span class="vue-treeselect__check-mark"><CheckboxSelected/></span>
             )
             if (checkedState === 2 && !hasChildren && parentNodeCheckedState === 2) checkMark = (
               <span class="vue-treeselect__check-mark"><CheckboxSelectedOpen/></span>
